@@ -7,19 +7,19 @@ class Contacts extends Component {
     this.state = {
       contacts: [
         {
-          id: 1,
+          id: "1",
           name: "krishna",
           email: "krs@gmail.com",
           phone: "999-888",
         },
         {
-          id: 2,
+          id: "2",
           name: "Arjun",
           email: "Ajn@gmai.com",
           phone: "368-666-777",
         },
         {
-          id: 3,
+          id: "3",
           name: "Dilip",
           email: "Dil@gmai.com",
           phone: "765-343-777",
@@ -27,14 +27,23 @@ class Contacts extends Component {
       ],
     };
   }
+  deleteContact = id => {
+    const { contacts } = this.state;
+    const newContacts = contacts.filter(
+      (contact) => contact.id !== id);
+
+    this.setState({ contacts: newContacts })
+  }
   render() {
     const { contacts } = this.state;
     return (
-      <div>
+      <React.Fragment>
         {contacts.map((contact) => (
-          <Contact id={contact.id} contact={contact} />
+          <Contact key={contact.id} contact={contact}
+            deleteClickHandler=
+            {this.deleteContact.bind(this, contact.id)} />
         ))}
-      </div>
+      </React.Fragment>
       // <div>
       //   {contacts.map((contact) => (
       //     <h1>{contact.name}</h1>
